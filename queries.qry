@@ -1,0 +1,107 @@
+// Returns all the users on the system
+query AllUsers {
+  description: "Returns all users in the registry"
+  statement:
+    SELECT org.certify.documents.participant.CERDOCUser
+}
+
+// Returns all the institutes on the system
+query AllInstitutes {
+  description: "Returns all the institutes in the registry"
+  statement:
+    SELECT org.certify.documents.participant.CERDOCInstitute
+}
+
+// Returns a users info with a specific ID
+query specificUser {
+  description: "Returns a users info with a specific ID"
+  statement:
+    SELECT org.certify.documents.participant.CERDOCUser
+      WHERE(participantKey == _$userId)
+}
+
+// Returns an institutes info with a specific ID
+query specificInstitute {
+  description: "Returns an institutes info with a specific ID"
+  statement:
+    SELECT org.certify.documents.participant.CERDOCInstitute
+      WHERE(participantKey == _$instituteId)
+}
+
+// Returns all the documents in the registry
+query AllDocuments {
+  description: "Returns all the documents in the registry"
+  statement:
+    SELECT org.certify.documents.document.Document
+}
+
+// Returns all the pending documents that belongs to a user
+query usersPendingDocuments {
+  description: "Returns all the pending documents that belongs to a user"
+  statement:
+    SELECT org.certify.documents.document.Document
+      WHERE(ownerId == _$userId AND state == 'PENDING')
+}
+
+// Returns all the refused documents that belongs to a user
+query usersRefusedDocuments {
+  description: "Returns all the refused documents that belongs to a user"
+  statement:
+    SELECT org.certify.documents.document.Document
+      WHERE(ownerId == _$userId AND state == 'REFUSED')
+}
+
+// Returns all the approved documents that belongs to a user
+query usersApprovedDocuments {
+  description: "Returns all the approved documents that belongs to a user"
+  statement:
+    SELECT org.certify.documents.document.Document
+      WHERE(ownerId == _$userId AND state == 'APPROVED')
+}
+
+// Returns all the documents that belongs to a user
+query usersDocuments {
+  description: "Returns all the documents that belongs to a user"
+  statement:
+    SELECT org.certify.documents.document.Document
+      WHERE(ownerId == _$userId)
+}
+
+// Returns all the pending documents that belongs to a institute
+query institutesPendingDocuments {
+  description: "Returns all the documents that belongs to a institute and PENDING"
+  statement:
+    SELECT org.certify.documents.document.Document
+      WHERE(instituteId == _$instituteId AND state == 'PENDING')
+}
+
+// Returns all the Approved documents that belongs to a institute
+query institutesApprovedDocuments {
+  description: "Returns all the documents that belongs to a institute and Approved"
+  statement:
+    SELECT org.certify.documents.document.Document
+      WHERE(instituteId == _$instituteId AND state == 'APPROVED')
+}
+
+// Returns all the refused documents that belongs to a institute
+query institutesRefusedDocuments {
+  description: "Returns all the documents that belongs to a institute and Refused"
+  statement:
+    SELECT org.certify.documents.document.Document
+      WHERE(instituteId == _$instituteId AND state == 'REFUSED')
+}
+
+// Returns all the documents that belongs to a institute
+query institutesDocuments {
+  description: "Returns all the documents that belongs to a institute"
+  statement:
+    SELECT org.certify.documents.document.Document
+      WHERE(instituteId == _$instituteId)
+}
+
+// Returns HistorianRecord
+query AllHistorian {
+  description: "Returns all the HistorianRecord on the network"
+  statement:
+    SELECT org.hyperledger.composer.system.HistorianRecord    
+}

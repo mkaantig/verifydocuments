@@ -1,0 +1,59 @@
+// To crete a User
+
+{
+  "$class": "org.certify.documents.participant.CERDOCUser",
+  "fName": "kaan",
+  "lName": "tig",
+  "participantKey": "kaantig",
+  "participantType": "USER",
+  "contact": {
+    "$class": "org.certify.documents.participant.Contact",
+    "country": "Turkey",
+    "city": "Izmir",
+    "email": "kaantig35@gmail.com"
+  }
+}
+
+{
+  "$class": "org.certify.documents.participant.CERDOCUser",
+  "fName": "Muzaffer",
+  "lName": "Tig",
+  "participantKey": "5518",
+  "participantType": "USER",
+  "contact": {
+    "$class": "org.certify.documents.participant.Contact",
+    "country": "Turkey",
+    "city": "Izmir",
+    "email": "muzaffertig@gmail.com"
+  }
+}
+
+// To create an Institute
+
+{
+  "$class": "org.certify.documents.participant.CERDOCInstitute",
+  "name": "Xi'an Jiaotong Liverpool University",
+  "instituteType": "UNIVERSITY",
+  "participantKey": "XJTLU",
+  "participantType": "INSTITUTE",
+  "contact": {
+    "$class": "org.certify.documents.participant.Contact",
+    "country": "China",
+    "city": "Suzhou",
+    "email": "xjtlu@edu.cn"
+  }
+}
+
+{
+  "$class": "org.certify.documents.participant.CERDOCInstitute",
+  "name": "Middle East Techinical University",
+  "instituteType": "UNIVERSITY",
+  "participantKey": "METU",
+  "participantType": "INSTITUTE",
+  "contact": {
+    "$class": "org.certify.documents.participant.Contact",
+    "country": "Turkey",
+    "city": "Ankara",
+    "email": "metu@edu.tr"
+  }
+}

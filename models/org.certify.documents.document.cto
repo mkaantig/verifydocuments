@@ -1,0 +1,86 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+namespace org.certify.documents.document
+
+import org.certify.documents.participant.*
+
+asset Document identified by documentId {
+  
+  -->	CERDOCUser			      owner			 	      optional
+  -->	CERDOCInstitute		    relatedInstitute 	optional
+  o     String              ownerId           optional
+  o     String              instituteId       optional
+  o	  	String 				      documentId											                  // Unique id for each document
+  o   	DocumentType      	documentType   	 	default = "UNIVERSITYDEGREE"	  // Type of the document
+  o   	String            	documentNo       	optional       					        // Number of the document given by the institute like diploma no
+  o   	String            	yearGiven        									                // The year when the document was given  
+  o   	String            	hashingResult    									                // Holds the hashing algorithm of the e-document in string form ---SHA256 ---
+  o   	DocumentState     	state            	default = "PENDING"           	// State of the e-document 
+  
+}
+  
+enum DocumentType {
+
+  o   DRIVINGLICENSE        // For driving license 
+  o   UNIVERSITYDEGREE      // For University Degree
+  o   BIRTHCERTIFICATE      // For Birth Certificate
+  o   DEATHCERTIFICATE      // For Death Certificate
+  o   OTHER                 // For any other document type given by an institute 
+
+}
+  
+enum DocumentState {    // Stands for document's state whether if it is PENDING or APPROVED or REFUSED
+
+  o   PENDING           // This will be default. The document is in pending until it got APPROVED or REFUSED by the releated institute
+  o   APPROVED          // This means the sha-256 codes of e-document meets the CONDITIONS
+  o   REFUSED           // This means e-document is not same as its original because hashing result is different
+
+}
+  
+// Transaction to create documents
+transaction CreateDocument {
+
+  o   DocumentType    documentType   
+  o   String          documentNo        optional
+  o   String          instituteId
+  o   String          yearGiven
+  o   String          hashingResult
+
+}
+  
+// Event indicating that document is created
+event DocumentCreated {
+
+  o   String          documentId   
+  o   String          hashingResult
+
+}
+  
+  // Evaluate a document
+transaction EvaluateDocument {
+  
+  	o 	String 				documentId					// DocumentId of already existed document
+    o 	String				hashingResult				// Hashing Result that the institute found for that file
+  
+}
+  
+  // Event indicating that document is evaluated
+  event DocumentEvaluated {
+ 	
+  	o 	String 				  documentId
+  	o 	String 				  hashingResult
+  	o 	DocumentState		state
+  
+}
